@@ -22,12 +22,35 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+
+/**
+   AFURLResponseSerialization 负责解析网络返回数据，检查数据是否合法, 把NSData数据转成相应的对象，内置的转换器有json,xml,plist,Image。
+   可以继承基类AFHTTPResponseSerializer去解析更多的数据格式。
+   属性：
+    acceptableStatusCodes 规定了合法的状态码和数据类型，例如JSONSerialization就把acceptableContentTypes设为@”application/json”, @”text/json”, @”text/javascript”，若不是这三者之一，就验证失败，返回相应的NSError对象。一般子类不需要重写这个方法，只需要设置好acceptableStatusCodes和acceptableContentTypes就行了
+   主要两个方法：
+   1-validateResponse:data:error:
+    基类AFHTTPResponseSerializer的这个方法检测返回的Http状态码和数据是否合法,
+   2.-responseObjectForResponse:data:error:
+    这个方法解析数据，把NSData转成相应的对象，上层AFURLConnectionOperation会调用这个方法获取转换后的对象。
+ 
+    在解析数据之前会先调上述的validateResponse方法检测HTTP响应是否合法，要注意的是即使这里检测返回不合法，也会继续解析数据生成对象
+    ，因为有可能错误信息就在返回的数据里。
+ 
+    如果validateResponse返回error，这里的解析数据又出错，这时有两个error对象，怎样返回给上层？这里的处理是把解析数据的NSError对象保存到validateResponse NSError的userInfo里，作为UnderlyingError，NSError专门给了个NSUnderlyingErrorKey作为这种错误包含错误的键值。
+ 
+    剩下的就是NSecureCoding相关方法了，如果子类增加了property，需要加上相应的NSecureCoding方法。
+ */
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `AFURLResponseSerialization` protocol is adopted by an object that decodes data into a more useful object representation, according to details in the server response. Response serializers may additionally perform validation on the incoming response and data.
 
  For example, a JSON response serializer may check for an acceptable status code (`2XX` range) and content type (`application/json`), decoding a valid JSON response into an object.
+ 
+ AFURLResponseSerialization的协议是一个对象,通过解码数据转换成一个更有用的对象表示,根据服务器响应的细节。响应序列化器可能另外执行验证传入的响应和数据。例如,JSON响应序列化器可以检查一个可接受的状态代码(“2 xx”范围)和内容类型(application / JSON),解码一个有效的JSON响应对象
  */
 @protocol AFURLResponseSerialization <NSObject, NSSecureCoding, NSCopying>
 
@@ -75,11 +98,16 @@ NS_ASSUME_NONNULL_BEGIN
  The acceptable HTTP status codes for responses. When non-`nil`, responses with status codes not contained by the set will result in an error during validation.
 
  See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+ 
+  规定了合法的状态码和数据类型，
+  例如JSONSerialization就把acceptableContentTypes设为@”application/json”, @”text/json”, @”text/javascript”，
+   若不是这三者之一，就验证失败，返回相应的NSError对象。一般子类不需要重写这个方法，只需要设置好acceptableStatusCodes和acceptableContentTypes就行了
  */
 @property (nonatomic, copy, nullable) NSIndexSet *acceptableStatusCodes;
 
 /**
  The acceptable MIME types for responses. When non-`nil`, responses with a `Content-Type` with MIME types that do not intersect with the set will result in an error during validation.
+ 
  */
 @property (nonatomic, copy, nullable) NSSet <NSString *> *acceptableContentTypes;
 
