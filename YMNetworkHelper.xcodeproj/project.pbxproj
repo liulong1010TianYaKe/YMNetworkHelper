@@ -31,6 +31,30 @@
 		FDC1F97A1CB7DB6A006B3DFB /* NetworkResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9751CB7DB6A006B3DFB /* NetworkResultModel.m */; };
 		FDC1F97B1CB7DB6A006B3DFB /* NetworkSessionHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9771CB7DB6A006B3DFB /* NetworkSessionHelp.m */; };
 		FDC1F97C1CB7DB6A006B3DFB /* NSProgress+KyoDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9791CB7DB6A006B3DFB /* NSProgress+KyoDownload.m */; };
+		FDC1F9A51CB7DC9B006B3DFB /* btn_blue_gaoliang.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F97F1CB7DC9B006B3DFB /* btn_blue_gaoliang.png */; };
+		FDC1F9A61CB7DC9B006B3DFB /* btn_blue_moren.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9801CB7DC9B006B3DFB /* btn_blue_moren.png */; };
+		FDC1F9A71CB7DC9B006B3DFB /* button_249_47_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9811CB7DC9B006B3DFB /* button_249_47_58@2x.png */; };
+		FDC1F9A81CB7DC9B006B3DFB /* button_249_47_58_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9821CB7DC9B006B3DFB /* button_249_47_58_selected@2x.png */; };
+		FDC1F9A91CB7DC9B006B3DFB /* com_refresh_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9831CB7DC9B006B3DFB /* com_refresh_icon@2x.png */; };
+		FDC1F9AA1CB7DC9B006B3DFB /* com_refresh_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9841CB7DC9B006B3DFB /* com_refresh_icon@3x.png */; };
+		FDC1F9AB1CB7DC9B006B3DFB /* com_tipsView_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9851CB7DC9B006B3DFB /* com_tipsView_logo@2x.png */; };
+		FDC1F9AC1CB7DC9B006B3DFB /* prompt_icon_refresh_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9861CB7DC9B006B3DFB /* prompt_icon_refresh_normal@2x.png */; };
+		FDC1F9AD1CB7DC9B006B3DFB /* prompt_icon_refresh_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9871CB7DC9B006B3DFB /* prompt_icon_refresh_normal@3x.png */; };
+		FDC1F9AE1CB7DC9B006B3DFB /* prompt_icon_wifi_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9881CB7DC9B006B3DFB /* prompt_icon_wifi_normal@2x.png */; };
+		FDC1F9AF1CB7DC9B006B3DFB /* prompt_icon_wifi_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F9891CB7DC9B006B3DFB /* prompt_icon_wifi_normal@3x.png */; };
+		FDC1F9B01CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F98A1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@2x.png */; };
+		FDC1F9B11CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F98B1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@3x.png */; };
+		FDC1F9B21CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F98C1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@2x.png */; };
+		FDC1F9B31CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC1F98D1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@3x.png */; };
+		FDC1F9B41CB7DC9B006B3DFB /* KyoLoadMoreControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9901CB7DC9B006B3DFB /* KyoLoadMoreControl.m */; };
+		FDC1F9B51CB7DC9B006B3DFB /* KyoRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9921CB7DC9B006B3DFB /* KyoRefreshControl.m */; };
+		FDC1F9B61CB7DC9B006B3DFB /* KyoDataTipsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9951CB7DC9B006B3DFB /* KyoDataTipsModel.m */; };
+		FDC1F9B71CB7DC9B006B3DFB /* KyoDataTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9971CB7DC9B006B3DFB /* KyoDataTipsView.m */; };
+		FDC1F9B81CB7DC9B006B3DFB /* RHAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F99A1CB7DC9B006B3DFB /* RHAnimator.m */; };
+		FDC1F9B91CB7DC9B006B3DFB /* RHRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F99C1CB7DC9B006B3DFB /* RHRefreshControl.m */; };
+		FDC1F9BA1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F99E1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m */; };
+		FDC1F9BB1CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9A21CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m */; };
+		FDC1F9BC1CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9A41CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +107,40 @@
 		FDC1F9771CB7DB6A006B3DFB /* NetworkSessionHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkSessionHelp.m; sourceTree = "<group>"; };
 		FDC1F9781CB7DB6A006B3DFB /* NSProgress+KyoDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSProgress+KyoDownload.h"; sourceTree = "<group>"; };
 		FDC1F9791CB7DB6A006B3DFB /* NSProgress+KyoDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSProgress+KyoDownload.m"; sourceTree = "<group>"; };
+		FDC1F97F1CB7DC9B006B3DFB /* btn_blue_gaoliang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_blue_gaoliang.png; sourceTree = "<group>"; };
+		FDC1F9801CB7DC9B006B3DFB /* btn_blue_moren.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_blue_moren.png; sourceTree = "<group>"; };
+		FDC1F9811CB7DC9B006B3DFB /* button_249_47_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_249_47_58@2x.png"; sourceTree = "<group>"; };
+		FDC1F9821CB7DC9B006B3DFB /* button_249_47_58_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_249_47_58_selected@2x.png"; sourceTree = "<group>"; };
+		FDC1F9831CB7DC9B006B3DFB /* com_refresh_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_refresh_icon@2x.png"; sourceTree = "<group>"; };
+		FDC1F9841CB7DC9B006B3DFB /* com_refresh_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_refresh_icon@3x.png"; sourceTree = "<group>"; };
+		FDC1F9851CB7DC9B006B3DFB /* com_tipsView_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_tipsView_logo@2x.png"; sourceTree = "<group>"; };
+		FDC1F9861CB7DC9B006B3DFB /* prompt_icon_refresh_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_icon_refresh_normal@2x.png"; sourceTree = "<group>"; };
+		FDC1F9871CB7DC9B006B3DFB /* prompt_icon_refresh_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_icon_refresh_normal@3x.png"; sourceTree = "<group>"; };
+		FDC1F9881CB7DC9B006B3DFB /* prompt_icon_wifi_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_icon_wifi_normal@2x.png"; sourceTree = "<group>"; };
+		FDC1F9891CB7DC9B006B3DFB /* prompt_icon_wifi_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_icon_wifi_normal@3x.png"; sourceTree = "<group>"; };
+		FDC1F98A1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_img_aberrant_normal-1@2x.png"; sourceTree = "<group>"; };
+		FDC1F98B1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_img_aberrant_normal-1@3x.png"; sourceTree = "<group>"; };
+		FDC1F98C1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_img_aberrant_normal-4@2x.png"; sourceTree = "<group>"; };
+		FDC1F98D1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prompt_img_aberrant_normal-4@3x.png"; sourceTree = "<group>"; };
+		FDC1F98F1CB7DC9B006B3DFB /* KyoLoadMoreControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoLoadMoreControl.h; sourceTree = "<group>"; };
+		FDC1F9901CB7DC9B006B3DFB /* KyoLoadMoreControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoLoadMoreControl.m; sourceTree = "<group>"; };
+		FDC1F9911CB7DC9B006B3DFB /* KyoRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoRefreshControl.h; sourceTree = "<group>"; };
+		FDC1F9921CB7DC9B006B3DFB /* KyoRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoRefreshControl.m; sourceTree = "<group>"; };
+		FDC1F9941CB7DC9B006B3DFB /* KyoDataTipsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoDataTipsModel.h; sourceTree = "<group>"; };
+		FDC1F9951CB7DC9B006B3DFB /* KyoDataTipsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoDataTipsModel.m; sourceTree = "<group>"; };
+		FDC1F9961CB7DC9B006B3DFB /* KyoDataTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyoDataTipsView.h; sourceTree = "<group>"; };
+		FDC1F9971CB7DC9B006B3DFB /* KyoDataTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyoDataTipsView.m; sourceTree = "<group>"; };
+		FDC1F9991CB7DC9B006B3DFB /* RHAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHAnimator.h; sourceTree = "<group>"; };
+		FDC1F99A1CB7DC9B006B3DFB /* RHAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHAnimator.m; sourceTree = "<group>"; };
+		FDC1F99B1CB7DC9B006B3DFB /* RHRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRefreshControl.h; sourceTree = "<group>"; };
+		FDC1F99C1CB7DC9B006B3DFB /* RHRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRefreshControl.m; sourceTree = "<group>"; };
+		FDC1F99D1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRefreshControlConfiguration.h; sourceTree = "<group>"; };
+		FDC1F99E1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRefreshControlConfiguration.m; sourceTree = "<group>"; };
+		FDC1F99F1CB7DC9B006B3DFB /* RHRefreshControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRefreshControlView.h; sourceTree = "<group>"; };
+		FDC1F9A11CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRefreshControlViewPinterest.h; sourceTree = "<group>"; };
+		FDC1F9A21CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRefreshControlViewPinterest.m; sourceTree = "<group>"; };
+		FDC1F9A31CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHRefreshControlViewSequenceImages.h; sourceTree = "<group>"; };
+		FDC1F9A41CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHRefreshControlViewSequenceImages.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +173,7 @@
 		F77EE1B01CB69CA0009B8A04 /* YMNetworkHelper */ = {
 			isa = PBXGroup;
 			children = (
+				FDC1F97D1CB7DC9B006B3DFB /* KyoRefreshControl */,
 				F77EE1C81CB69F13009B8A04 /* AFNetworking */,
 				F77EE1DC1CB69F1F009B8A04 /* UIKit+AFNetworking */,
 				F77EE1B41CB69CA0009B8A04 /* AppDelegate.h */,
@@ -199,6 +258,87 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		FDC1F97D1CB7DC9B006B3DFB /* KyoRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F97E1CB7DC9B006B3DFB /* Images */,
+				FDC1F98E1CB7DC9B006B3DFB /* KyoLoadMore */,
+				FDC1F9911CB7DC9B006B3DFB /* KyoRefreshControl.h */,
+				FDC1F9921CB7DC9B006B3DFB /* KyoRefreshControl.m */,
+				FDC1F9931CB7DC9B006B3DFB /* KyoTipsView */,
+				FDC1F9981CB7DC9B006B3DFB /* RHRefreshControl */,
+			);
+			path = KyoRefreshControl;
+			sourceTree = "<group>";
+		};
+		FDC1F97E1CB7DC9B006B3DFB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F97F1CB7DC9B006B3DFB /* btn_blue_gaoliang.png */,
+				FDC1F9801CB7DC9B006B3DFB /* btn_blue_moren.png */,
+				FDC1F9811CB7DC9B006B3DFB /* button_249_47_58@2x.png */,
+				FDC1F9821CB7DC9B006B3DFB /* button_249_47_58_selected@2x.png */,
+				FDC1F9831CB7DC9B006B3DFB /* com_refresh_icon@2x.png */,
+				FDC1F9841CB7DC9B006B3DFB /* com_refresh_icon@3x.png */,
+				FDC1F9851CB7DC9B006B3DFB /* com_tipsView_logo@2x.png */,
+				FDC1F9861CB7DC9B006B3DFB /* prompt_icon_refresh_normal@2x.png */,
+				FDC1F9871CB7DC9B006B3DFB /* prompt_icon_refresh_normal@3x.png */,
+				FDC1F9881CB7DC9B006B3DFB /* prompt_icon_wifi_normal@2x.png */,
+				FDC1F9891CB7DC9B006B3DFB /* prompt_icon_wifi_normal@3x.png */,
+				FDC1F98A1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@2x.png */,
+				FDC1F98B1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@3x.png */,
+				FDC1F98C1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@2x.png */,
+				FDC1F98D1CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		FDC1F98E1CB7DC9B006B3DFB /* KyoLoadMore */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F98F1CB7DC9B006B3DFB /* KyoLoadMoreControl.h */,
+				FDC1F9901CB7DC9B006B3DFB /* KyoLoadMoreControl.m */,
+			);
+			path = KyoLoadMore;
+			sourceTree = "<group>";
+		};
+		FDC1F9931CB7DC9B006B3DFB /* KyoTipsView */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F9941CB7DC9B006B3DFB /* KyoDataTipsModel.h */,
+				FDC1F9951CB7DC9B006B3DFB /* KyoDataTipsModel.m */,
+				FDC1F9961CB7DC9B006B3DFB /* KyoDataTipsView.h */,
+				FDC1F9971CB7DC9B006B3DFB /* KyoDataTipsView.m */,
+			);
+			path = KyoTipsView;
+			sourceTree = "<group>";
+		};
+		FDC1F9981CB7DC9B006B3DFB /* RHRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F9991CB7DC9B006B3DFB /* RHAnimator.h */,
+				FDC1F99A1CB7DC9B006B3DFB /* RHAnimator.m */,
+				FDC1F99B1CB7DC9B006B3DFB /* RHRefreshControl.h */,
+				FDC1F99C1CB7DC9B006B3DFB /* RHRefreshControl.m */,
+				FDC1F99D1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.h */,
+				FDC1F99E1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m */,
+				FDC1F99F1CB7DC9B006B3DFB /* RHRefreshControlView.h */,
+				FDC1F9A01CB7DC9B006B3DFB /* RHRefreshControlViewStyle */,
+			);
+			path = RHRefreshControl;
+			sourceTree = "<group>";
+		};
+		FDC1F9A01CB7DC9B006B3DFB /* RHRefreshControlViewStyle */ = {
+			isa = PBXGroup;
+			children = (
+				FDC1F9A11CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.h */,
+				FDC1F9A21CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m */,
+				FDC1F9A31CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.h */,
+				FDC1F9A41CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m */,
+			);
+			path = RHRefreshControlViewStyle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,9 +396,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC1F9A71CB7DC9B006B3DFB /* button_249_47_58@2x.png in Resources */,
+				FDC1F9A91CB7DC9B006B3DFB /* com_refresh_icon@2x.png in Resources */,
+				FDC1F9B21CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@2x.png in Resources */,
+				FDC1F9AA1CB7DC9B006B3DFB /* com_refresh_icon@3x.png in Resources */,
+				FDC1F9A51CB7DC9B006B3DFB /* btn_blue_gaoliang.png in Resources */,
+				FDC1F9AF1CB7DC9B006B3DFB /* prompt_icon_wifi_normal@3x.png in Resources */,
+				FDC1F9B01CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@2x.png in Resources */,
 				F77EE1C11CB69CA0009B8A04 /* LaunchScreen.storyboard in Resources */,
+				FDC1F9AD1CB7DC9B006B3DFB /* prompt_icon_refresh_normal@3x.png in Resources */,
+				FDC1F9AE1CB7DC9B006B3DFB /* prompt_icon_wifi_normal@2x.png in Resources */,
+				FDC1F9A81CB7DC9B006B3DFB /* button_249_47_58_selected@2x.png in Resources */,
 				F77EE1BE1CB69CA0009B8A04 /* Assets.xcassets in Resources */,
+				FDC1F9B11CB7DC9B006B3DFB /* prompt_img_aberrant_normal-1@3x.png in Resources */,
+				FDC1F9AC1CB7DC9B006B3DFB /* prompt_icon_refresh_normal@2x.png in Resources */,
+				FDC1F9B31CB7DC9B006B3DFB /* prompt_img_aberrant_normal-4@3x.png in Resources */,
 				F77EE1BC1CB69CA0009B8A04 /* Main.storyboard in Resources */,
+				FDC1F9AB1CB7DC9B006B3DFB /* com_tipsView_logo@2x.png in Resources */,
+				FDC1F9A61CB7DC9B006B3DFB /* btn_blue_moren.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,13 +424,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC1F9BA1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m in Sources */,
+				FDC1F9B71CB7DC9B006B3DFB /* KyoDataTipsView.m in Sources */,
 				F77EE1F71CB69F1F009B8A04 /* UIProgressView+AFNetworking.m in Sources */,
 				F77EE1DB1CB69F13009B8A04 /* AFURLSessionManager.m in Sources */,
 				F77EE1F91CB69F1F009B8A04 /* UIWebView+AFNetworking.m in Sources */,
+				FDC1F9B91CB7DC9B006B3DFB /* RHRefreshControl.m in Sources */,
+				FDC1F9B61CB7DC9B006B3DFB /* KyoDataTipsModel.m in Sources */,
+				FDC1F9B51CB7DC9B006B3DFB /* KyoRefreshControl.m in Sources */,
 				F77EE1F61CB69F1F009B8A04 /* UIImageView+AFNetworking.m in Sources */,
+				FDC1F9B41CB7DC9B006B3DFB /* KyoLoadMoreControl.m in Sources */,
 				F77EE1B91CB69CA0009B8A04 /* ViewController.m in Sources */,
 				F77EE1F51CB69F1F009B8A04 /* UIButton+AFNetworking.m in Sources */,
 				F77EE1B61CB69CA0009B8A04 /* AppDelegate.m in Sources */,
+				FDC1F9BB1CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m in Sources */,
 				F77EE1D71CB69F13009B8A04 /* AFNetworkReachabilityManager.m in Sources */,
 				F77EE1F81CB69F1F009B8A04 /* UIRefreshControl+AFNetworking.m in Sources */,
 				F77EE1B31CB69CA0009B8A04 /* main.m in Sources */,
@@ -285,11 +447,13 @@
 				F77EE1F31CB69F1F009B8A04 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				FDC1F97A1CB7DB6A006B3DFB /* NetworkResultModel.m in Sources */,
 				FDC1F97C1CB7DB6A006B3DFB /* NSProgress+KyoDownload.m in Sources */,
+				FDC1F9B81CB7DC9B006B3DFB /* RHAnimator.m in Sources */,
 				F77EE1DA1CB69F13009B8A04 /* AFURLResponseSerialization.m in Sources */,
 				F77EE1D61CB69F13009B8A04 /* AFHTTPSessionManager.m in Sources */,
 				F77EE1F21CB69F1F009B8A04 /* AFImageDownloader.m in Sources */,
 				FDC1F97B1CB7DB6A006B3DFB /* NetworkSessionHelp.m in Sources */,
 				F77EE1F41CB69F1F009B8A04 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				FDC1F9BC1CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

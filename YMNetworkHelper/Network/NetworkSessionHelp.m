@@ -96,7 +96,7 @@
         _sharedClient.httpSessionManager.securityPolicy = securityPolicy;
         _sharedClient.urlSessionManager.securityPolicy = securityPolicy;
         
-        [[NSNotificationCenter defaultCenter] addObserver:_sharedClient selector:@selector(loginSuccessNotification:) name:kNotificationName_LoginSuccess object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:_sharedClient selector:@selector(loginSuccessNotification:) name:kNotificationName_LoginSuccess object:nil];
     });
     
     return _sharedClient;
@@ -118,8 +118,8 @@
     
     //统计参数
     if ([dict isKindOfClass:[NSMutableDictionary class]]) {
-        [dict setObject:[KyoUtil getAppstoreVersion] forKey:@"VersionStr"];
-        [dict setObject:[KyoUtil getAppKeyChar] forKey:@"IDCode"];
+//        [dict setObject:[KyoUtil getAppstoreVersion] forKey:@"VersionStr"];
+//        [dict setObject:[KyoUtil getAppKeyChar] forKey:@"IDCode"];
     }
     
     //把字典拼接成JSON字符串
@@ -135,11 +135,11 @@
     
     //添加公共参数
     NSMutableDictionary *dictParams = [NSMutableDictionary dictionary];
-    [dictParams setObject:kAppPlatform forKey:@"appType"];
-    [dictParams setObject:[[NSDate date] strLongDate] forKey:@"timestamp"];
-    [dictParams setObject:[UserInfo sharedUserInfo].session ? : @"12345" forKey:@"session"];
-    [dictParams setObject:[KyoUtil rootViewController].appConfig.longTail forKey:@"lt"];    //保险公司标示
-    [dictParams setObject:args forKey:@"args"];
+//    [dictParams setObject:kAppPlatform forKey:@"appType"];
+//    [dictParams setObject:[[NSDate date] strLongDate] forKey:@"timestamp"];
+//    [dictParams setObject:[UserInfo sharedUserInfo].session ? : @"12345" forKey:@"session"];
+//    [dictParams setObject:[KyoUtil rootViewController].appConfig.longTail forKey:@"lt"];    //保险公司标示
+//    [dictParams setObject:args forKey:@"args"];
     
     //对字典中的key进行排序，并拼接串
     NSString *strEncryption = @"";
@@ -150,7 +150,7 @@
     }
     
     //对拼接后得到的串进行加密处理
-    strEncryption = [[[kAppSalt stringByAppendingString:strEncryption] md5] uppercaseString];
+//    strEncryption = [[[kAppSalt stringByAppendingString:strEncryption] md5] uppercaseString];
     [dictParams setObject:strEncryption forKey:@"sign"];
     
     return dictParams;
@@ -176,7 +176,7 @@
                 errorMsg = @"操作失败，请稍后重试.";
             }
             
-            [MBProgressHUD showMessageHUD:errorMsg withTimeInterval:kShowMessageTime inView:view];
+//            [MBProgressHUD showMessageHUD:errorMsg withTimeInterval:kShowMessageTime inView:view];
             
             return NO;
         }
@@ -237,12 +237,12 @@
     NSURLSessionDataTask *urlSessionDataTask = [[NetworkSessionHelp shareNetwork].httpSessionManager POST:serverAPIUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NetworkResultModel *result = nil;
         @try {
-            result = responseObject ? [NetworkResultModel objectWithKeyValues:responseObject] : nil;
-            if ([result.State isEqualToString:kMultipleDevicesSignInErrorCode]) {
-                [NetworkSessionHelp thePopUpDialogSecurityTips:result.Msg];
-            } else if ([result.State isEqualToString:kReLogInErrorCode]) {
-                [NetworkSessionHelp reLoginWithTips:result.Msg];
-            }
+//            result = responseObject ? [NetworkResultModel objectWithKeyValues:responseObject] : nil;
+//            if ([result.State isEqualToString:kMultipleDevicesSignInErrorCode]) {
+//                [NetworkSessionHelp thePopUpDialogSecurityTips:result.Msg];
+//            } else if ([result.State isEqualToString:kReLogInErrorCode]) {
+//                [NetworkSessionHelp reLoginWithTips:result.Msg];
+//            }
         }
         @catch (NSException *exception) {
             result = [[NetworkResultModel alloc] init];
@@ -278,7 +278,7 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NetworkResultModel *result = nil;
         @try {
-            result = responseObject ? [NetworkResultModel objectWithKeyValues:responseObject] : nil;
+//            result = responseObject ? [NetworkResultModel objectWithKeyValues:responseObject] : nil;
             if ([result.State isEqualToString:kMultipleDevicesSignInErrorCode]) {
                 [NetworkSessionHelp thePopUpDialogSecurityTips:result.Msg];
             } else if ([result.State isEqualToString:kReLogInErrorCode]) {
@@ -320,69 +320,70 @@
                               [savePath substringFromIndex:lastCharRange.location + 1]];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:tempFilePath]) {
-        KyoLog(@"继续下载");
-        NSData *resumeData = [NSData dataWithContentsOfFile:tempFilePath];
-        NSURLSessionDownloadTask *downloadTask = [self.urlSessionManager downloadTaskWithResumeData:resumeData progress:&progressByte destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-            if ([fileManager fileExistsAtPath:tempFilePath]) {
-                [fileManager removeItemAtPath:tempFilePath error:nil];
-            }
-            NSString *folder = [savePath stringByDeletingLastPathComponent];
-            if (![fileManager fileExistsAtPath:folder]) {
-                [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
-            }
-            return [NSURL fileURLWithPath:savePath];
-        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-            [self deleteDownloadProgress:url];
-            
-            NetworkResultModel *result = [[NetworkResultModel alloc] init];
-            if (error && error.code != NSURLErrorCancelled) {   //有出错block且出错原因不是cancel，则调用
-                if (errorBlock) {
-                    errorBlock(error);
-                }
-            } else {
-                if (completionBlock) {
-                    completionBlock(nil, result);
-                }
-            }
-        }];
-        [self insertDownloadUrl:url withProgress:progressByte withCurrentProcess:process];
-        KyoURLSessionTask *task = [[KyoURLSessionTask alloc] initWithTask:downloadTask withDownloadSavePath:savePath];
-        return task;
-    } else {
-        KyoLog(@"从0下载");
+//    if ([fileManager fileExistsAtPath:tempFilePath]) {
+////        KyoLog(@"继续下载");
+//        NSData *resumeData = [NSData dataWithContentsOfFile:tempFilePath];
+//        NSURLSessionDownloadTask *downloadTask = [self.urlSessionManager downloadTaskWithResumeData:resumeData progress:&progressByte destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+//            if ([fileManager fileExistsAtPath:tempFilePath]) {
+//                [fileManager removeItemAtPath:tempFilePath error:nil];
+//            }
+//            NSString *folder = [savePath stringByDeletingLastPathComponent];
+//            if (![fileManager fileExistsAtPath:folder]) {
+//                [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
+//            }
+//            return [NSURL fileURLWithPath:savePath];
+//        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//            [self deleteDownloadProgress:url];
+//            
+//            NetworkResultModel *result = [[NetworkResultModel alloc] init];
+//            if (error && error.code != NSURLErrorCancelled) {   //有出错block且出错原因不是cancel，则调用
+//                if (errorBlock) {
+//                    errorBlock(error);
+//                }
+//            } else {
+//                if (completionBlock) {
+//                    completionBlock(nil, result);
+//                }
+//            }
+//        }];
+//        [self insertDownloadUrl:url withProgress:progressByte withCurrentProcess:process];
+//        KyoURLSessionTask *task = [[KyoURLSessionTask alloc] initWithTask:downloadTask withDownloadSavePath:savePath];
+//        return task;
+//    } else {
+//        KyoLog(@"从0下载");
         NSURLRequest *request = [self.httpSessionManager.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:url relativeToURL:self.httpSessionManager.baseURL] absoluteString] parameters:params error:nil];    //session下载只能用get方式
-        NSURLSessionDownloadTask *downloadTask = [self.urlSessionManager downloadTaskWithRequest:request progress:&progressByte destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-            if ([fileManager fileExistsAtPath:tempFilePath]) {
-                [fileManager removeItemAtPath:tempFilePath error:nil];
-            }
-            NSString *folder = [savePath stringByDeletingLastPathComponent];
-            if (![fileManager fileExistsAtPath:folder]) {
-                [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
-            }
-            return [NSURL fileURLWithPath:savePath];
-        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-            [self deleteDownloadProgress:url];
-
-            NetworkResultModel *result = [[NetworkResultModel alloc] init];
-            if (error && error.code != NSURLErrorCancelled) {   //有出错block且出错原因不是cancel，则调用
-                if (errorBlock) {
-                    errorBlock(error);
-                }
-            } else {
-                if (completionBlock) {
-                    completionBlock(nil, result);
-                }
-            }
-            
-            if (finishedBlock) {
-                finishedBlock(error);
-            }
-        }];
-        [self insertDownloadUrl:url withProgress:progressByte withCurrentProcess:process];
-        KyoURLSessionTask *task = [[KyoURLSessionTask alloc] initWithTask:downloadTask withDownloadSavePath:savePath];
-        return task;
-    }
+//        NSURLSessionDownloadTask *downloadTask = [self.urlSessionManager downloadTaskWithRequest:request progress:&progressByte destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+//            if ([fileManager fileExistsAtPath:tempFilePath]) {
+//                [fileManager removeItemAtPath:tempFilePath error:nil];
+//            }
+//            NSString *folder = [savePath stringByDeletingLastPathComponent];
+//            if (![fileManager fileExistsAtPath:folder]) {
+//                [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
+//            }
+//            return [NSURL fileURLWithPath:savePath];
+//        } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//            [self deleteDownloadProgress:url];
+//
+//            NetworkResultModel *result = [[NetworkResultModel alloc] init];
+//            if (error && error.code != NSURLErrorCancelled) {   //有出错block且出错原因不是cancel，则调用
+//                if (errorBlock) {
+//                    errorBlock(error);
+//                }
+//            } else {
+//                if (completionBlock) {
+//                    completionBlock(nil, result);
+//                }
+//            }
+//            
+//            if (finishedBlock) {
+//                finishedBlock(error);
+//            }
+//        }];
+//        [self insertDownloadUrl:url withProgress:progressByte withCurrentProcess:process];
+//        KyoURLSessionTask *task = [[KyoURLSessionTask alloc] initWithTask:downloadTask withDownloadSavePath:savePath];
+//        return task;
+//    }
+    return nil;
 }
 
 //cancel downfile and save data
@@ -401,7 +402,7 @@
                                           tempDoucment,
                                           [kyoURLSessionTask.savePath substringFromIndex:lastCharRange.location + 1]];
                 BOOL result = [resumeData writeToFile:tempFilePath atomically:YES];
-                KyoLog(@"存储下载temp结果：%ld", (long)result);
+//                KyoLog(@"存储下载temp结果：%ld", (long)result);
             }
         }];
     }
@@ -436,54 +437,54 @@
 //多点登录被破下线提示
 + (void)thePopUpDialogSecurityTips:(NSString *)tip
 {
-    if (!manyPeopleLogOnElasticBoxMarking &&
-        ![manyPeopleLogOnElasticBoxMarking isEqualToString:tip] &&
-        !networkTipAlertView) {
-        networkTipAlertView = [[UIAlertView alloc]initWithTitle:@"提示" message:tip delegate:[NetworkSessionHelp shareNetwork]  cancelButtonTitle:@"知道了" otherButtonTitles:@"重新登录", nil];
-        networkTipAlertView.tag = kNetworkKeyAlertViewTag;
-        [networkTipAlertView show];
-        
-        manyPeopleLogOnElasticBoxMarking = tip;
-        
-        [UserInfo sharedUserInfo].session = @"12345";
-    }
+//    if (!manyPeopleLogOnElasticBoxMarking &&
+//        ![manyPeopleLogOnElasticBoxMarking isEqualToString:tip] &&
+//        !networkTipAlertView) {
+//        networkTipAlertView = [[UIAlertView alloc]initWithTitle:@"提示" message:tip delegate:[NetworkSessionHelp shareNetwork]  cancelButtonTitle:@"知道了" otherButtonTitles:@"重新登录", nil];
+//        networkTipAlertView.tag = kNetworkKeyAlertViewTag;
+//        [networkTipAlertView show];
+//        
+//        manyPeopleLogOnElasticBoxMarking = tip;
+//        
+//        [UserInfo sharedUserInfo].session = @"12345";
+//    }
 }
 
 /**< 需要重新登录被迫下线提示（大多数是session过期） */
 + (void)reLoginWithTips:(NSString *)msg
 {
-    if (reloginAlertMarking) {
-        [[KyoUtil rootViewController] loginCompletion:^{
-        }];
-        
-        reloginAlertMarking = YES; //设置 已重新登录
-        [[UserInfo sharedUserInfo] logout];
-        
-        [[KyoUtil getCurrentNavigationViewController] popToRootViewControllerAnimated:YES];
-    }
+//    if (reloginAlertMarking) {
+//        [[KyoUtil rootViewController] loginCompletion:^{
+//        }];
+//        
+//        reloginAlertMarking = YES; //设置 已重新登录
+//        [[UserInfo sharedUserInfo] logout];
+//        
+//        [[KyoUtil getCurrentNavigationViewController] popToRootViewControllerAnimated:YES];
+//    }
 }
 
 #pragma mark --------------------
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == kNetworkKeyAlertViewTag) {  //多点登录被T下线
-        if (alertView.cancelButtonIndex == buttonIndex) {
-            [[UserInfo sharedUserInfo] logout];
-            [[KyoUtil getCurrentNavigationViewController] popToRootViewControllerAnimated:YES];
-            networkTipAlertView = nil;
-        } else {  //重新登录
-            UIWindow *targetWindow = kShowMessageView();
-            [MBProgressHUD showLoadingHUD:nil inView:targetWindow withDelegate:nil userInteractionEnabled:YES];
-            [[KyoUtil rootViewController] networkLogin:^(BOOL result, NSError *error) {
-                if (!result) {
-                    [[UserInfo sharedUserInfo] logout];
-                }
-                [MBProgressHUD hideLoadingHUD:0 withView:targetWindow];
-                networkTipAlertView = nil;
-            }];
-        }
-    }
+//    if (alertView.tag == kNetworkKeyAlertViewTag) {  //多点登录被T下线
+//        if (alertView.cancelButtonIndex == buttonIndex) {
+//            [[UserInfo sharedUserInfo] logout];
+//            [[KyoUtil getCurrentNavigationViewController] popToRootViewControllerAnimated:YES];
+//            networkTipAlertView = nil;
+//        } else {  //重新登录
+//            UIWindow *targetWindow = kShowMessageView();
+//            [MBProgressHUD showLoadingHUD:nil inView:targetWindow withDelegate:nil userInteractionEnabled:YES];
+//            [[KyoUtil rootViewController] networkLogin:^(BOOL result, NSError *error) {
+//                if (!result) {
+//                    [[UserInfo sharedUserInfo] logout];
+//                }
+//                [MBProgressHUD hideLoadingHUD:0 withView:targetWindow];
+//                networkTipAlertView = nil;
+//            }];
+//        }
+//    }
 }
 
 
