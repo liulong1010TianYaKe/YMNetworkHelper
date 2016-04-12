@@ -174,6 +174,10 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 
 #pragma mark -
 
+
+// 定义了一个static的方法，表示该方法只能在本文件中使用
+// 函数整体上使用了单例模式
+//   此处需要observer的keypath为allowsCellularAccess、cachePolicy、HTTPShouldHandleCookies、 HTTPShouldUsePipelining、networkServiceType、timeoutInterval
 static NSArray * AFHTTPRequestSerializerObservedKeyPaths() {
     static NSArray *_AFHTTPRequestSerializerObservedKeyPaths = nil;
     static dispatch_once_t onceToken;
@@ -262,7 +266,7 @@ static void *AFHTTPRequestSerializerObserverContext = &AFHTTPRequestSerializerOb
     }
 }
 
-#pragma mark -
+#pragma mark -  KVO需要观察的KeyPath
 
 // Workarounds for crashing behavior using Key-Value Observing with XCTest
 // See https://github.com/AFNetworking/AFNetworking/issues/2523
@@ -344,11 +348,27 @@ forHTTPHeaderField:(NSString *)field
 
 #pragma mark -
 
+/**
+ 使用指定的HTTP method和URLString来构建一个NSMutableURLRequest对象实例
+ 
+ 如果method是GET、HEAD、DELETE，那parameter将会被用来构建一个基于url编码的查询字符串（query url）
+ ，并且这个字符串会直接加到request的url后面。对于其他的Method，比如POST/PUT，它们会根
+ 据parameterEncoding属性进行编码，而后加到request的http body上。
+ @param method request的HTTP methodt，比如 `GET`, `POST`, `PUT`, or `DELETE`. 该参数不能为空
+ @param URLString 用来创建request的URL
+ @param parameters 既可以对method为GET的request设置一个查询字符串(query string)，也可以设置到request的HTTP body上
+ @param error 构建request时发生的错误
+ 
+ @return  一个NSMutableURLRequest的对象
+ */
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                  URLString:(NSString *)URLString
                                 parameters:(id)parameters
                                      error:(NSError *__autoreleasing *)error
 {
+    // 第一步：进行url转化和参数化断言
+    
+    // 方法或函数应当在代码最开始处使用 NSParameterAssert / NSCParameterAssert 来强制输入的值满足先验条件，这是一条金科玉律；其他情况下使用 NSAssert / NSCAssert。
     NSParameterAssert(method);
     NSParameterAssert(URLString);
 
@@ -356,15 +376,18 @@ forHTTPHeaderField:(NSString *)field
 
     NSParameterAssert(url);
 
+    // 第二步：使用url构建并初始化NSMutableURLRequest，然后设置HTTPMethod
     NSMutableURLRequest *mutableRequest = [[NSMutableURLRequest alloc] initWithURL:url];
     mutableRequest.HTTPMethod = method;
 
+    // 第三步：给NSMutableURLRequest自带的属性赋值
+     // NSURLRequest/NSMutableURLRequest需要赋值的属性可以在AFHTTPRequestSerializerObservedKeyPaths()中找到
     for (NSString *keyPath in AFHTTPRequestSerializerObservedKeyPaths()) {
         if ([self.mutableObservedChangedKeyPaths containsObject:keyPath]) {
             [mutableRequest setValue:[self valueForKeyPath:keyPath] forKey:keyPath];
         }
     }
-
+    // 第四步：将传入的parameters进行编码，并添加到request中
     mutableRequest = [[self requestBySerializingRequest:mutableRequest withParameters:parameters error:error] mutableCopy];
 
 	return mutableRequest;
@@ -462,7 +485,59 @@ forHTTPHeaderField:(NSString *)field
 }
 
 #pragma mark - AFURLRequestSerialization
+/*
+     将传入的parameters进行编码，并添加到request中
+ 
+        一般我们请求都会按key=value的方式带上各种参数，GET方法参数直接加在URL上，POST方法放在body上，
+      NSURLRequest没有封装好这个参数的解析，只能我们自己拼好字符串。
+      AFNetworking提供了接口，让参数可以是NSDictionary, NSArray, NSSet这些类型，再由内部解析成字符串后赋给NSURLRequest。
+ 
+ 
+参数解析：
+ 
+ @{
+ @"name" : @"bang",
+ @"phone": @{@"mobile": @"xx", @"home": @"xx"},
+ @"families": @[@"father", @"mother"],
+ @"nums": [NSSet setWithObjects:@"1", @"2", nil]
+ }
+ ->
+ @[
+ field: @"name", value: @"bang",
+ field: @"phone[mobile]", value: @"xx",
+ field: @"phone[home]", value: @"xx",
+ field: @"families[]", value: @"father",
+ field: @"families[]", value: @"mother",
+ field: @"nums", value: @"1",
+ field: @"nums", value: @"2",
+ ]
+ ->
+ name=bang&phone[mobile]=xx&phone[home]=xx&families[]=father&families[]=mother&nums=1&num=2
+ 
+ 
+ 如：
+ NSString *URLString = @"http://example.com";
+ NSDictionary *parameters = @{@"foo": @"bar", @"baz": @[@1, @2, @3]};
+ 
+ 
+ 使用GET方式，最后得到的request是这样的：
+ 
+ [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URLString parameters:parameters error:nil];
+ 
+ GET http://example.com?foo=bar&baz[]=1&baz[]=2&baz[]=3
+ 
 
+ 或者使用POST方式，最后得到的request是这样的：
+ 
+ [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:URLString parameters:parameters];
+ 
+ POST http://example.com/
+ Content-Type: application/x-www-form-urlencoded
+ 
+ foo=bar&baz[]=1&baz[]=2&baz[]=3
+ 
+
+ */
 - (NSURLRequest *)requestBySerializingRequest:(NSURLRequest *)request
                                withParameters:(id)parameters
                                         error:(NSError *__autoreleasing *)error
@@ -471,12 +546,16 @@ forHTTPHeaderField:(NSString *)field
 
     NSMutableURLRequest *mutableRequest = [request mutableCopy];
 
+    // 设置request的http header field：
     [self.HTTPRequestHeaders enumerateKeysAndObjectsUsingBlock:^(id field, id value, BOOL * __unused stop) {
         if (![request valueForHTTPHeaderField:field]) {
             [mutableRequest setValue:value forHTTPHeaderField:field];
         }
     }];
 
+    // 据parameter来构建查询字符串， 有两种构建query的方式：
+    // 1，如果自定义了queryStringSerialization（AFQueryStringSerializationBlock的block变量）。那么就使用自定义的queryStringSerialization构建方式
+    //  2.一种就是上面的那个AFQueryStringFromParameters()函数，
     NSString *query = nil;
     if (parameters) {
         if (self.queryStringSerialization) {
@@ -519,6 +598,7 @@ forHTTPHeaderField:(NSString *)field
 
 #pragma mark - NSKeyValueObserving
 
+// automaticallyNotifiesObserversForKey:来返回NO，达到关闭自动通知的功能
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
     if ([AFHTTPRequestSerializerObservedKeyPaths() containsObject:key]) {
         return NO;
@@ -533,6 +613,7 @@ forHTTPHeaderField:(NSString *)field
                        context:(void *)context
 {
     if (context == AFHTTPRequestSerializerObserverContext) {
+        // KVO 当AFHTTPRequestSerializerObserverContext中有value变化了(且变化后的新值部位NSNull null) 就会响应observeValueForKeyPath 这个函数从而self.mutableObservedChangedKeyPaths会添加这个keyPath
         if ([change[NSKeyValueChangeNewKey] isEqual:[NSNull null]]) {
             [self.mutableObservedChangedKeyPaths removeObject:keyPath];
         } else {

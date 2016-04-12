@@ -29,6 +29,19 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
 };
 
 /**
+    Https对比Http已经很安全，但在建立安全链接的过程中，可能遭受中间人攻击。防御这种类型攻击的最直接方式是Client使用者能正确鉴定Server发的证书
+  【目前很多浏览器在这方面做的足够好，用户只要不在遇到警告时还继续其中的危险操作】，
+   而对于Client的开发者而言，一种方式保持一个可信的根证书颁发机构列表，确认可信的证书，警告或阻止不是可信根证书颁发机构颁发的证书。
+ 
+ 
+ 
+    SSL Pinning其实就是证书绑定，一般浏览器的做法是信任可信根证书颁发机构颁发的证书，
+    但在移动端【非浏览器的桌面应用亦如此】，应用只和少数的几个Server有交互，所以可以做得更极致点，直接就在应用内保留需要使用的具体Server的证书。
+    对于iOS开发者而言，如果使用AFNetwoking作为网络库，那么要做到这点就很方便，直接证书作为资源打包进去就好，AFNetworking会自动加载，具体代码就不贴了，nsscreencast已经有很好的tutorial。
+     http://nsscreencast.com/episodes/73-ssl-pinning
+ 
+ */
+/**
  `AFSecurityPolicy` evaluates server trust against pinned X.509 certificates and public keys over secure connections.
 
  Adding pinned SSL certificates to your app helps prevent man-in-the-middle attacks and other vulnerabilities. Applications dealing with sensitive customer data or financial information are strongly encouraged to route all communication over an HTTPS connection with SSL pinning configured and enabled.

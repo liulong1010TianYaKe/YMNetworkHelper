@@ -42,6 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
  http://developer.apple.com/library/iOS/#documentation/UserExperience/Conceptual/MobileHIG/UIElementGuidelines/UIElementGuidelines.html#//apple_ref/doc/uid/TP40006556-CH13-SW44
  */
 NS_EXTENSION_UNAVAILABLE_IOS("Use view controller based solutions where appropriate instead.")
+
+/**
+ AFNetworkActivityIndicatorManager  解决两个问题：
+   1.如何在status bar上显示小菊花
+   2. 判断什么时候显示小菊花， 也就是判断session task的开始和结束
+ 
+ */
 @interface AFNetworkActivityIndicatorManager : NSObject
 
 /**
@@ -81,6 +88,8 @@ NS_EXTENSION_UNAVAILABLE_IOS("Use view controller based solutions where appropri
 
 /**
  Increments the number of active network requests. If this number was zero before incrementing, this will start animating the status bar network activity indicator.
+ 
+ 增加主动网络请求的数量。如果这个数字是零之前递增，这将启动动画状态栏的网络活动指示器。
  */
 - (void)incrementActivityCount;
 
@@ -92,7 +101,7 @@ NS_EXTENSION_UNAVAILABLE_IOS("Use view controller based solutions where appropri
 /**
  Set the a custom method to be executed when the network activity indicator manager should be hidden/shown. By default, this is null, and the UIApplication Network Activity Indicator will be managed automatically. If this block is set, it is the responsiblity of the caller to manager the network activity indicator going forward.
 
- @param block A block to be executed when the network activity indicator status changes.
+ @param block A block to be executed when the network activity indicator status changes. 自定义sesion task  操作
  */
 - (void)setNetworkingActivityActionWithBlock:(nullable void (^)(BOOL networkActivityIndicatorVisible))block;
 

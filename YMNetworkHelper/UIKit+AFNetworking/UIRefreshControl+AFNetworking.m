@@ -28,6 +28,7 @@
 #import "AFURLSessionManager.h"
 
 @interface AFRefreshControlNotificationObserver : NSObject
+
 @property (readonly, nonatomic, weak) UIRefreshControl *refreshControl;
 - (instancetype)initWithActivityRefreshControl:(UIRefreshControl *)refreshControl;
 
@@ -37,7 +38,13 @@
 
 @implementation UIRefreshControl (AFNetworking)
 
+/**
+ 因为category是运行期决定的，所以当你在此处添加实例变量的话，那么这个类的内存空间就要变了，而类的内存空间是在编译期就确定了。这里你可以添加属性成员，
+ 但是得自己实现getter和setter方法,可以用objc_getAssociatedObject和objc_setAssociatedObject方法来绑定一个实例变量
+ 
+ */
 - (AFRefreshControlNotificationObserver *)af_notificationObserver {
+    //使用的是objc_getAssociatedObject和objc_setAssociatedObject方法来绑定一个实例变量
     AFRefreshControlNotificationObserver *notificationObserver = objc_getAssociatedObject(self, @selector(af_notificationObserver));
     if (notificationObserver == nil) {
         notificationObserver = [[AFRefreshControlNotificationObserver alloc] initWithActivityRefreshControl:self];
@@ -58,6 +65,8 @@
 {
     self = [super init];
     if (self) {
+        // 仅仅把refreshControl传过来，后续要调用refreshControl本身的几个方法
+        // 所以注意此处refreshControl定义的是weak属性
         _refreshControl = refreshControl;
     }
     return self;
@@ -65,7 +74,7 @@
 
 - (void)setRefreshingWithStateOfTask:(NSURLSessionTask *)task {
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-
+    //1. 先将之前的observe移除
     [notificationCenter removeObserver:self name:AFNetworkingTaskDidResumeNotification object:nil];
     [notificationCenter removeObserver:self name:AFNetworkingTaskDidSuspendNotification object:nil];
     [notificationCenter removeObserver:self name:AFNetworkingTaskDidCompleteNotification object:nil];
@@ -74,11 +83,15 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wreceiver-is-weak"
 #pragma clang diagnostic ignored "-Warc-repeated-use-of-weak"
+        // 2 如果当前task状态为NSURLSessionTaskStateRunning，先beginRefreshing，然后添加几个observer:
         if (task.state == NSURLSessionTaskStateRunning) {
             [self.refreshControl beginRefreshing];
 
+            //  AFNetworkingTaskDidResumeNotification（任务继续，所以调用beginRefreshing）
             [notificationCenter addObserver:self selector:@selector(af_beginRefreshing) name:AFNetworkingTaskDidResumeNotification object:task];
+            // AFNetworkingTaskDidCompleteNotification（任务完成，所以调用endRefreshing）
             [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFNetworkingTaskDidCompleteNotification object:task];
+            // AFNetworkingTaskDidSuspendNotification（任务挂起，所以调用endRefreshing）
             [notificationCenter addObserver:self selector:@selector(af_endRefreshing) name:AFNetworkingTaskDidSuspendNotification object:task];
         } else {
             [self.refreshControl endRefreshing];

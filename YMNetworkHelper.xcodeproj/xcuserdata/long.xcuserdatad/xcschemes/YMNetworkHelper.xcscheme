@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FD2BA0711CBCEF1C00682B61"
+               BuildableName = "YMNetworkHelperUITests.xctest"
+               BlueprintName = "YMNetworkHelperUITests"
+               ReferencedContainer = "container:YMNetworkHelper.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UIKit+AFNetworking.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    // NSURLCache 为应用的URL请求提供了le内存(对应memoryCapacity）以及磁盘上（对应diskCapacity）的综合缓存机制
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4*1024*1024 diskCapacity:20*1024*1024 diskPath:nil];
+    //想使用NSURLCache带来的好处，就需要在此处设置一个sharedURLCache。
+    [NSURLCache setSharedURLCache:URLCache];
+    
+    //当你有session task正在运行时，这个小菊花就会转啊转。这个是自动检测的，只需要你设置AFNetworkingActivityIndicatorManager的sharedManager中的enabled设为YES即可
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     return YES;
 }
 

@@ -24,11 +24,12 @@
 #if TARGET_OS_IOS
 #import "AFURLSessionManager.h"
 
+
 typedef NS_ENUM(NSInteger, AFNetworkActivityManagerState) {
-    AFNetworkActivityManagerStateNotActive,
-    AFNetworkActivityManagerStateDelayingStart,
-    AFNetworkActivityManagerStateActive,
-    AFNetworkActivityManagerStateDelayingEnd
+    AFNetworkActivityManagerStateNotActive,  // 什么鸟也没有
+    AFNetworkActivityManagerStateDelayingStart, // 网络请求开始
+    AFNetworkActivityManagerStateActive,  // 有指示器 ，正在网络请求中
+    AFNetworkActivityManagerStateDelayingEnd  // 指示器消失 ，网络加载完毕
 };
 
 static NSTimeInterval const kDefaultAFNetworkActivityManagerActivationDelay = 1.0;
@@ -74,6 +75,7 @@ typedef void (^AFNetworkActivityActionBlock)(BOOL networkActivityIndicatorVisibl
         return nil;
     }
     self.currentState = AFNetworkActivityManagerStateNotActive;
+    // 监测AFN Task 的请求网络通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidStart:) name:AFNetworkingTaskDidResumeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidSuspendNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkRequestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
@@ -107,11 +109,22 @@ typedef void (^AFNetworkActivityActionBlock)(BOOL networkActivityIndicatorVisibl
     }
 }
 
+/**
+    手动通知：
+    KVO中有两种通知Observer的方式，自动通知和手动通知。自动通知顾名思义就是只要值变化了，就自动通知观察者。
+ 
+    ①但是有时候我们有些地方的值变化了，并不想通知观察者亦或不想立即通知观察者，或者
+    ②此处虽然值还没变，但是我也想通知观察者，那么就可以使用手动通知，在你想发送给观察者消息的地方，加上willChangeValueForKey和didChangeValueForKey。
+
+  tip ： 在此之前最好是把自动通知关掉，可以利用automaticallyNotifiesObserversForKey:来返回NO，达到关闭自动通知的功能（当然，开着也行，那么自动通知和手动通知会揉在一起，执行起来很乱）
+ 
+ */
 - (void)setNetworkActivityIndicatorVisible:(BOOL)networkActivityIndicatorVisible {
     if (_networkActivityIndicatorVisible != networkActivityIndicatorVisible) {
-        [self willChangeValueForKey:@"networkActivityIndicatorVisible"];
+        
+        [self willChangeValueForKey:@"networkActivityIndicatorVisible"];  // KVO  手动通知 需要改变 networkActivityIndicatorVisible
         @synchronized(self) {
-             _networkActivityIndicatorVisible = networkActivityIndicatorVisible;
+             _networkActivityIndicatorVisible = networkActivityIndicatorVisible; // 手动通知 需要改变 networkActivityIndicatorVisible
         }
         [self didChangeValueForKey:@"networkActivityIndicatorVisible"];
         if (self.networkActivityActionBlock) {
@@ -199,6 +212,11 @@ typedef void (^AFNetworkActivityActionBlock)(BOOL networkActivityIndicatorVisibl
     }
 }
 
+/*
+    状态 转移操作
+   isNetworkActivityOccurring  这个其实是最真实的记录session task起始的状态
+ 
+ */
 - (void)updateCurrentStateForNetworkActivityChange {
     if (self.enabled) {
         switch (self.currentState) {
@@ -225,8 +243,12 @@ typedef void (^AFNetworkActivityActionBlock)(BOOL networkActivityIndicatorVisibl
 }
 
 - (void)startActivationDelayTimer {
+    // 定义了一个名为activationDelayTimer的定时器，定时器的时间为self.activationDelay。
+    // 执行完定时器后，执行activationDelayTimerFired函数
     self.activationDelayTimer = [NSTimer
                                  timerWithTimeInterval:self.activationDelay target:self selector:@selector(activationDelayTimerFired) userInfo:nil repeats:NO];
+    // 将该定时器添加到RunLoop里面执行
+    // 使用的Mode是NSRunLoopCommonModes，表示不管RunLoop出于什么状态，都执行这个计时器任务（因为如果不指定这个mode的话，UI操作会阻塞计时器任务）
     [[NSRunLoop mainRunLoop] addTimer:self.activationDelayTimer forMode:NSRunLoopCommonModes];
 }
 

@@ -28,6 +28,9 @@
 		F77EE1F71CB69F1F009B8A04 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F77EE1EC1CB69F1F009B8A04 /* UIProgressView+AFNetworking.m */; };
 		F77EE1F81CB69F1F009B8A04 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F77EE1EE1CB69F1F009B8A04 /* UIRefreshControl+AFNetworking.m */; };
 		F77EE1F91CB69F1F009B8A04 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F77EE1F01CB69F1F009B8A04 /* UIWebView+AFNetworking.m */; };
+		FD2BA0681CBCE58B00682B61 /* YMNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2BA0671CBCE58A00682B61 /* YMNetworkClient.m */; };
+		FD2BA0751CBCEF1C00682B61 /* YMNetworkHelperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2BA0741CBCEF1C00682B61 /* YMNetworkHelperUITests.m */; };
+		FD2BA0801CBCF3BD00682B61 /* AFTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2BA07F1CBCF3BD00682B61 /* AFTestCase.m */; };
 		FDC1F97A1CB7DB6A006B3DFB /* NetworkResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9751CB7DB6A006B3DFB /* NetworkResultModel.m */; };
 		FDC1F97B1CB7DB6A006B3DFB /* NetworkSessionHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9771CB7DB6A006B3DFB /* NetworkSessionHelp.m */; };
 		FDC1F97C1CB7DB6A006B3DFB /* NSProgress+KyoDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9791CB7DB6A006B3DFB /* NSProgress+KyoDownload.m */; };
@@ -56,6 +59,16 @@
 		FDC1F9BB1CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9A21CB7DC9B006B3DFB /* RHRefreshControlViewPinterest.m */; };
 		FDC1F9BC1CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC1F9A41CB7DC9B006B3DFB /* RHRefreshControlViewSequenceImages.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FD2BA0771CBCEF1C00682B61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F77EE1A61CB69CA0009B8A04 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F77EE1AD1CB69CA0009B8A04;
+			remoteInfo = YMNetworkHelper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F77EE1AE1CB69CA0009B8A04 /* YMNetworkHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YMNetworkHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +114,13 @@
 		F77EE1EE1CB69F1F009B8A04 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		F77EE1EF1CB69F1F009B8A04 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		F77EE1F01CB69F1F009B8A04 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		FD2BA0661CBCE58A00682B61 /* YMNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMNetworkClient.h; sourceTree = "<group>"; };
+		FD2BA0671CBCE58A00682B61 /* YMNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMNetworkClient.m; sourceTree = "<group>"; };
+		FD2BA0721CBCEF1C00682B61 /* YMNetworkHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YMNetworkHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2BA0741CBCEF1C00682B61 /* YMNetworkHelperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YMNetworkHelperUITests.m; sourceTree = "<group>"; };
+		FD2BA0761CBCEF1C00682B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD2BA07E1CBCF3BD00682B61 /* AFTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTestCase.h; sourceTree = "<group>"; };
+		FD2BA07F1CBCF3BD00682B61 /* AFTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTestCase.m; sourceTree = "<group>"; };
 		FDC1F9741CB7DB6A006B3DFB /* NetworkResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkResultModel.h; sourceTree = "<group>"; };
 		FDC1F9751CB7DB6A006B3DFB /* NetworkResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkResultModel.m; sourceTree = "<group>"; };
 		FDC1F9761CB7DB6A006B3DFB /* NetworkSessionHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkSessionHelp.h; sourceTree = "<group>"; };
@@ -151,6 +171,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FD2BA06F1CBCEF1C00682B61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -158,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				F77EE1B01CB69CA0009B8A04 /* YMNetworkHelper */,
+				FD2BA0731CBCEF1C00682B61 /* YMNetworkHelperUITests */,
 				F77EE1AF1CB69CA0009B8A04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				F77EE1AE1CB69CA0009B8A04 /* YMNetworkHelper.app */,
+				FD2BA0721CBCEF1C00682B61 /* YMNetworkHelperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +202,7 @@
 		F77EE1B01CB69CA0009B8A04 /* YMNetworkHelper */ = {
 			isa = PBXGroup;
 			children = (
+				FD2BA0651CBCE54900682B61 /* YMNetworkClient */,
 				FDC1F97D1CB7DC9B006B3DFB /* KyoRefreshControl */,
 				F77EE1C81CB69F13009B8A04 /* AFNetworking */,
 				F77EE1DC1CB69F1F009B8A04 /* UIKit+AFNetworking */,
@@ -182,6 +212,7 @@
 				F77EE1B71CB69CA0009B8A04 /* ViewController.h */,
 				F77EE1B81CB69CA0009B8A04 /* ViewController.m */,
 				F77EE1BA1CB69CA0009B8A04 /* Main.storyboard */,
+				FD2BA06B1CBCEE9300682B61 /* Test */,
 				F77EE1BD1CB69CA0009B8A04 /* Assets.xcassets */,
 				F77EE1BF1CB69CA0009B8A04 /* LaunchScreen.storyboard */,
 				F77EE1C21CB69CA0009B8A04 /* Info.plist */,
@@ -243,6 +274,33 @@
 				F77EE1F01CB69F1F009B8A04 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		FD2BA0651CBCE54900682B61 /* YMNetworkClient */ = {
+			isa = PBXGroup;
+			children = (
+				FD2BA0661CBCE58A00682B61 /* YMNetworkClient.h */,
+				FD2BA0671CBCE58A00682B61 /* YMNetworkClient.m */,
+			);
+			path = YMNetworkClient;
+			sourceTree = "<group>";
+		};
+		FD2BA06B1CBCEE9300682B61 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		FD2BA0731CBCEF1C00682B61 /* YMNetworkHelperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FD2BA0741CBCEF1C00682B61 /* YMNetworkHelperUITests.m */,
+				FD2BA0761CBCEF1C00682B61 /* Info.plist */,
+				FD2BA07E1CBCF3BD00682B61 /* AFTestCase.h */,
+				FD2BA07F1CBCF3BD00682B61 /* AFTestCase.m */,
+			);
+			path = YMNetworkHelperUITests;
 			sourceTree = "<group>";
 		};
 		FDC1F9731CB7DB6A006B3DFB /* Network */ = {
@@ -359,6 +417,24 @@
 			productReference = F77EE1AE1CB69CA0009B8A04 /* YMNetworkHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FD2BA0711CBCEF1C00682B61 /* YMNetworkHelperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD2BA0791CBCEF1C00682B61 /* Build configuration list for PBXNativeTarget "YMNetworkHelperUITests" */;
+			buildPhases = (
+				FD2BA06E1CBCEF1C00682B61 /* Sources */,
+				FD2BA06F1CBCEF1C00682B61 /* Frameworks */,
+				FD2BA0701CBCEF1C00682B61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD2BA0781CBCEF1C00682B61 /* PBXTargetDependency */,
+			);
+			name = YMNetworkHelperUITests;
+			productName = YMNetworkHelperUITests;
+			productReference = FD2BA0721CBCEF1C00682B61 /* YMNetworkHelperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -370,6 +446,10 @@
 				TargetAttributes = {
 					F77EE1AD1CB69CA0009B8A04 = {
 						CreatedOnToolsVersion = 7.2;
+					};
+					FD2BA0711CBCEF1C00682B61 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = F77EE1AD1CB69CA0009B8A04;
 					};
 				};
 			};
@@ -387,6 +467,7 @@
 			projectRoot = "";
 			targets = (
 				F77EE1AD1CB69CA0009B8A04 /* YMNetworkHelper */,
+				FD2BA0711CBCEF1C00682B61 /* YMNetworkHelperUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -417,6 +498,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FD2BA0701CBCEF1C00682B61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -424,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD2BA0681CBCE58B00682B61 /* YMNetworkClient.m in Sources */,
 				FDC1F9BA1CB7DC9B006B3DFB /* RHRefreshControlConfiguration.m in Sources */,
 				FDC1F9B71CB7DC9B006B3DFB /* KyoDataTipsView.m in Sources */,
 				F77EE1F71CB69F1F009B8A04 /* UIProgressView+AFNetworking.m in Sources */,
@@ -457,7 +546,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FD2BA06E1CBCEF1C00682B61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD2BA0801CBCF3BD00682B61 /* AFTestCase.m in Sources */,
+				FD2BA0751CBCEF1C00682B61 /* YMNetworkHelperUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FD2BA0781CBCEF1C00682B61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F77EE1AD1CB69CA0009B8A04 /* YMNetworkHelper */;
+			targetProxy = FD2BA0771CBCEF1C00682B61 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F77EE1BA1CB69CA0009B8A04 /* Main.storyboard */ = {
@@ -581,6 +687,32 @@
 			};
 			name = Release;
 		};
+		FD2BA07A1CBCEF1C00682B61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = YMNetworkHelperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = hzins.YMNetworkHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = YMNetworkHelper;
+			};
+			name = Debug;
+		};
+		FD2BA07B1CBCEF1C00682B61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = YMNetworkHelperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = hzins.YMNetworkHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = YMNetworkHelper;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -601,6 +733,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		FD2BA0791CBCEF1C00682B61 /* Build configuration list for PBXNativeTarget "YMNetworkHelperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD2BA07A1CBCEF1C00682B61 /* Debug */,
+				FD2BA07B1CBCEF1C00682B61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
