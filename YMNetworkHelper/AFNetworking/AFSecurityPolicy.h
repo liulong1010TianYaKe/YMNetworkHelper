@@ -48,6 +48,14 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
  */
 
 NS_ASSUME_NONNULL_BEGIN
+/**
+    HTTPS 安全策略：
+    当访问一个HTTPS的网站时，浏览器会帮我们很多隐藏的工作，这其实是SSL通道建立的三次握手过程：
+ 
+
+ 
+ 
+ */
 
 @interface AFSecurityPolicy : NSObject <NSSecureCoding, NSCopying>
 
@@ -67,6 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Whether or not to trust servers with an invalid or expired SSL certificates. Defaults to `NO`.
+ YES表示如果此处允许使用自建证书（服务器自己弄的CA证书，非官方）
  */
 @property (nonatomic, assign) BOOL allowInvalidCertificates;
 

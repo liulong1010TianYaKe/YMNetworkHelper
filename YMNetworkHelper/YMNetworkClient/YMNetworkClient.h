@@ -10,4 +10,5 @@
 
 @interface YMNetworkClient : NSObject
 + (instancetype)shareNetworkClient;
+- (void)testBaidu;
 @end

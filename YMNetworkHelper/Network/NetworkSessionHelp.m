@@ -32,6 +32,8 @@
 #pragma mark --------------------
 #pragma mark - Methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
 //清空网络请求
 - (void)clearOperation {
     if (self && self.task) {
@@ -509,5 +511,7 @@
         });
     }
 }
+
+#pragma clang diagnostic pop
 
 @end

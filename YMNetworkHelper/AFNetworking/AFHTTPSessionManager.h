@@ -218,6 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param success A block object to be executed when the task finishes successfully. This block has no return value and takes two arguments: the data task, and the response object created by the client response serializer.
  @param failure A block object to be executed when the task finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a two arguments: the data task and the error describing the network or parsing error that occurred.
 
+   Multipart是HTTP协议为web表单新增的上传文件的协议
  @see -dataTaskWithRequest:completionHandler:
  */
 - (nullable NSURLSessionDataTask *)POST:(NSString *)URLString

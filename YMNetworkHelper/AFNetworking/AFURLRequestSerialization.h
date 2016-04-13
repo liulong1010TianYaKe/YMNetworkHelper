@@ -70,6 +70,8 @@ FOUNDATION_EXPORT NSString * AFQueryStringFromParameters(NSDictionary *parameter
  @param error The error that occurred while attempting to encode the request parameters.
 
  @return A serialized request.
+ 
+ request是由三个部分组成的：①请求行(request-line) ②请求头(headers) ③请求体(request body)。
  */
 - (nullable NSURLRequest *)requestBySerializingRequest:(NSURLRequest *)request
                                withParameters:(nullable id)parameters
@@ -276,7 +278,7 @@ forHTTPHeaderField:(NSString *)field;
 
 @end
 
-#pragma mark -
+#pragma mark - AFMultipartFormData
 
 /**
  The `AFMultipartFormData` protocol defines the methods supported by the parameter in the block argument of `AFHTTPRequestSerializer -multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:`.

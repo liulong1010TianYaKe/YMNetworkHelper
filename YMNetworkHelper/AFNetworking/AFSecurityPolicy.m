@@ -92,14 +92,19 @@ _out:
 static BOOL AFServerTrustIsValid(SecTrustRef serverTrust) {
     BOOL isValid = NO;
     SecTrustResultType result;
+   // 对照下面的Require_noErr_Quiet函数解释，此处errorCode指的就是SecTrustEvaluate(serverTrust, &result)函数的返回值。如果serverTrust评估出错，那么就直接执行return isValid，默认isValid为NO。
     __Require_noErr_Quiet(SecTrustEvaluate(serverTrust, &result), _out);
 
+    // 如果SecTrustEvaluate函数评估没出错，那么就看result的结果
+    // 只有当result为kSecTrustResultUnspecified（此标志表示serverTrust评估成功，此证书也被暗中信任了，但是用户并没有显示地决定信任该证书），或者当result为kSecTrustResultProceed（此标志表示评估成功，和上面不同的是该评估得到了用户认可），这两者取其一就可以认为对serverTrust评估成功
+    // 在下面有对result类型（SecTrustResultType）的简单讲解
     isValid = (result == kSecTrustResultUnspecified || result == kSecTrustResultProceed);
 
 _out:
     return isValid;
 }
 
+// 取出serverTrust中证书链上每个证书的公钥，并返回对应的该组公钥
 static NSArray * AFCertificateTrustChainForServerTrust(SecTrustRef serverTrust) {
     CFIndex certificateCount = SecTrustGetCertificateCount(serverTrust);
     NSMutableArray *trustChain = [NSMutableArray arrayWithCapacity:(NSUInteger)certificateCount];
@@ -189,6 +194,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     return [self policyWithPinningMode:pinningMode withPinnedCertificates:[self defaultPinnedCertificates]];
 }
 
+// 初始化AFSecurityPolicy对象的SSLPinningMode和pinnedCertificates两个属性
 + (instancetype)policyWithPinningMode:(AFSSLPinningMode)pinningMode withPinnedCertificates:(NSSet *)pinnedCertificates {
     AFSecurityPolicy *securityPolicy = [[self alloc] init];
     securityPolicy.SSLPinningMode = pinningMode;
@@ -209,6 +215,8 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     return self;
 }
 
+// 此函数设置securityPolicy中的pinnedCertificates属性
+// 注意还将对应的self.pinnedPublicKeys属性也设置了，该属性表示的是对应证书的公钥（与pinnedCertificates中的证书是一一对应的）
 - (void)setPinnedCertificates:(NSSet *)pinnedCertificates {
     _pinnedCertificates = pinnedCertificates;
 
@@ -228,10 +236,18 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 }
 
 #pragma mark -
+// 根据severTrust和domain来检查服务器端发来的证书是否可信
 
+// 其中SecTrustRef是一个CoreFoundation类型，用于对服务器端传来的X.509证书评估的
+
+// 而我们都知道，数字证书的签发机构CA，在接收到申请者的资料后进行核对并确定信息的真实有效，然后就会制作一份符合X.509标准的文件。证书中的证书内容包含的持有者信息和公钥等都是由申请者提供的，而数字签名则是CA机构对证书内容进行hash加密后得到的，而这个数字签名就是我们验证证书是否是有可信CA签发的数据。
 - (BOOL)evaluateServerTrust:(SecTrustRef)serverTrust
                   forDomain:(NSString *)domain
 {
+    /**
+     
+      self.allowInvalidCertificates==YES表示如果此处允许使用自建证书（服务器自己弄的CA证书，非官方），并且还想验证domain是否有效(self.validatesDomainName == YES)，也就是说你想验证自建证书的domain是否有效。那么你必须使用pinnedCertificates（就是在客户端保存服务器端颁发的证书拷贝）才可以。但是你的SSLPinningMode为AFSSLPinningModeNone，表示你不使用SSL pinning，只跟浏览器一样在系统的信任机构列表里验证服务端返回的证书。所以当然你的客户端上没有你导入的pinnedCertificates，同样表示你无法验证该自建证书。所以都返回NO。最终结论就是要使用服务器端自建证书，那么就得将对应的证书拷贝到iOS客户端，并使用AFSSLPinningMode或AFSSLPinningModePublicKey
+     */
     if (domain && self.allowInvalidCertificates && self.validatesDomainName && (self.SSLPinningMode == AFSSLPinningModeNone || [self.pinnedCertificates count] == 0)) {
         // https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html
         //  According to the docs, you should only trust your provided certs for evaluation.
@@ -245,30 +261,41 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
         return NO;
     }
 
+    // 此处设置验证证书的策略
     NSMutableArray *policies = [NSMutableArray array];
     if (self.validatesDomainName) {
+        // 如果需要验证domain，那么就使用SecPolicyCreateSSL函数创建验证策略，其中第一个参数为true表示验证整个SSL证书链，第二个参数传入domain，用于判断整个证书链上叶子节点表示的那个domain是否和此处传入domain一致
         [policies addObject:(__bridge_transfer id)SecPolicyCreateSSL(true, (__bridge CFStringRef)domain)];
     } else {
+         // 如果不需要验证domain，就使用默认的BasicX509验证策略
         [policies addObject:(__bridge_transfer id)SecPolicyCreateBasicX509()];
     }
 
+    // 为serverTrust设置验证策略，即告诉客户端如何验证serverTrust
     SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);
 
+    // 如果SSLPinningMode为 AFSSLPinningModeNone，表示你不使用SSL pinning，但是我允许自建证书，那么返回YES，或者使用AFServerTrustIsValid函数看看serverTrust是否可信任，如果信任，也返回YES
     if (self.SSLPinningMode == AFSSLPinningModeNone) {
         return self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust);
     } else if (!AFServerTrustIsValid(serverTrust) && !self.allowInvalidCertificates) {
+          // 既不允许自建证书，而且使用AFServerTrustIsValid函数又返回NO，那么该serverTrust就真的不能通过验证了
         return NO;
     }
 
     switch (self.SSLPinningMode) {
+        // 理论上，上面那个部分已经解决了self.SSLPinningMode)为AFSSLPinningModeNone)等情况，所以此处再遇到，就直接返回NO
         case AFSSLPinningModeNone:
         default:
             return NO;
+        // 这个模式表示用证书绑定(SSL Pinning)方式验证证书，需要客户端保存有服务端的证书拷贝
+        // 注意客户端保存的证书存放在self.pinnedCertificates中
         case AFSSLPinningModeCertificate: {
             NSMutableArray *pinnedCertificates = [NSMutableArray array];
             for (NSData *certificateData in self.pinnedCertificates) {
+                // 这里使用SecCertificateCreateWithData函数对原先的pinnedCertificates做一些处理，保证返回的证书都是DER编码的X.509证书
                 [pinnedCertificates addObject:(__bridge_transfer id)SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData)];
             }
+            // 将pinnedCertificates设置成需要参与验证的Anchor Certificate（锚点证书，通过SecTrustSetAnchorCertificates设置了参与校验锚点证书之后，假如验证的数字证书是这个锚点证书的子节点，即验证的数字证书是由锚点证书对应CA或子CA签发的，或是该证书本身，则信任该证书），具体就是调用SecTrustEvaluate来验证。
             SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)pinnedCertificates);
 
             if (!AFServerTrustIsValid(serverTrust)) {
@@ -276,8 +303,10 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
             }
 
             // obtain the chain after being validated, which *should* contain the pinned certificate in the last position (if it's the Root CA)
+            // 服务器端的证书链，注意此处返回的证书链顺序是从叶节点到根节点
             NSArray *serverCertificates = AFCertificateTrustChainForServerTrust(serverTrust);
             
+            // 从服务器端证书链的根节点往下遍历，看看是否有与客户端的绑定证书一致的，有的话，就说明服务器端是可信的。因为遍历顺序正好相反，所以使用reverseObjectEnumerator
             for (NSData *trustChainCertificate in [serverCertificates reverseObjectEnumerator]) {
                 if ([self.pinnedCertificates containsObject:trustChainCertificate]) {
                     return YES;
@@ -286,8 +315,10 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
             
             return NO;
         }
+       // AFSSLPinningModePublicKey模式同样是用证书绑定(SSL Pinning)方式验证，客户端要有服务端的证书拷贝，只是验证时只验证证书里的公钥，不验证证书的有效期等信息。只要公钥是正确的，就能保证通信不会被窃听，因为中间人没有私钥，无法解开通过公钥加密的数据。
         case AFSSLPinningModePublicKey: {
             NSUInteger trustedPublicKeyCount = 0;
+            // 从serverTrust中取出服务器端传过来的所有可用的证书，并依次得到相应的公钥
             NSArray *publicKeys = AFPublicKeyTrustChainForServerTrust(serverTrust);
 
             for (id trustChainPublicKey in publicKeys) {
@@ -297,6 +328,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
                     }
                 }
             }
+          // trustedPublicKeyCount大于0说明服务器端中的某个证书和客户端绑定的证书公钥一致，认为服务器端是可信的
             return trustedPublicKeyCount > 0;
         }
     }
