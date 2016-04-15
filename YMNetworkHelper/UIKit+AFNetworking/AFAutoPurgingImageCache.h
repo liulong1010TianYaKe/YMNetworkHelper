@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The `AFImageCache` protocol defines a set of APIs for adding, removing and fetching images from a cache synchronously.
  */
-@protocol AFImageCache <NSObject>
+@protocol AFImageCache <NSObject>  
 
 /**
  Adds the image to the cache with the given identifier.

@@ -25,6 +25,9 @@
 
 #import "AFAutoPurgingImageCache.h"
 
+/**
+    UIImage存储模型
+ */
 @interface AFCachedImage : NSObject
 
 @property (nonatomic, strong) UIImage *image;
@@ -108,6 +111,7 @@
 }
 
 - (void)addImage:(UIImage *)image withIdentifier:(NSString *)identifier {
+    // 并行队列，等待前面线程完成后进行操作
     dispatch_barrier_async(self.synchronizationQueue, ^{
         AFCachedImage *cacheImage = [[AFCachedImage alloc] initWithImage:image identifier:identifier];
 

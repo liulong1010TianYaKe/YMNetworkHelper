@@ -111,6 +111,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///-------------------------------
 
 /**
+ 
+ 用于安全连接的服务器信任的安全策略的安全策略。` AFURLSessionManager `采用` defaultpolicy `除非另有规定
  The security policy used by created session to evaluate server trust for secure connections. `AFURLSessionManager` uses the `defaultPolicy` unless otherwise specified.
  */
 @property (nonatomic, strong) AFSecurityPolicy *securityPolicy;
@@ -192,7 +194,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Invalidates the managed session, optionally canceling pending tasks.
-
+  可以取消sessionTask
  @param cancelPendingTasks Whether or not to cancel pending tasks.
  */
 - (void)invalidateSessionCancelingTasks:(BOOL)cancelPendingTasks;

@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    [[YMNetworkClient shareNetworkClient] testBaidu];
+//    [[YMNetworkClient shareNetworkClient] testBaidu];
     
 // [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }

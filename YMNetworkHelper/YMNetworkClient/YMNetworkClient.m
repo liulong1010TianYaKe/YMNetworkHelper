@@ -26,7 +26,6 @@ static NSString *const AFHttpNetAPIBaseURLString = @"http:www.hzins.com/";
         _shareClient = [[YMNetworkClient alloc] init];
         
          // 初始化HTTP Client的base url，此处为@"https://api.app.net/"
-//        _shareClient.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:AFHttpNetAPIBaseURLString]];
         _shareClient.httpSessionManager = [AFHTTPSessionManager manager];
         
         //开启允许https模式   设置HTTP Client的安全策略为AFSSLPinningModeNone 默认
@@ -36,6 +35,9 @@ static NSString *const AFHttpNetAPIBaseURLString = @"http:www.hzins.com/";
     });
     return _shareClient;
 }
+
+
+
 
 - (void)testBaidu{
     NSURL *url = [NSURL URLWithString:@"http://www.hzins.com"];
@@ -57,7 +59,7 @@ static NSString *const AFHttpNetAPIBaseURLString = @"http:www.hzins.com/";
     
     [[self.httpSessionManager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
          NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-        (Byte *)[responseObject bytes]
+       
          userInfo[AFNetworkingTaskDidCompleteResponseSerializerKey] = self.httpSessionManager.responseSerializer;
                if (error) {
                    NSLog(@"%@",error);
